@@ -3,8 +3,8 @@ package com.petshopping.repositores;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.petshopping.domain.Servicos;
+import com.petshopping.domain.Pessoa;
 @Repository
-public interface ServicoRepositores extends JpaRepository<Servicos,Integer> {
+public interface PesooaRepositores extends JpaRepository<Pessoa,Integer> {
 
 }

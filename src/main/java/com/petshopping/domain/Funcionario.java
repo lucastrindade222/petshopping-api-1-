@@ -11,26 +11,27 @@ import javax.persistence.Id;
 @Entity
 public class Funcionario implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_func;
 	private String login;
 	private String senha;
 	private Endereco endereco;
+	private String funcao;
 	private Date dt_admin;
 	private Long salario;
-	
-	Funcionario(){
-		
+
+	public Funcionario() {
+
 	}
 
-	public Funcionario(Integer id_func, String login, String senha, Endereco endereco, Date dt_admin, Long salario) {
+	public Funcionario(Integer id_func, String login, String senha, String funcao, Date dt_admin, Long salario) {
 		super();
 		this.id_func = id_func;
 		this.login = login;
 		this.senha = senha;
-		this.endereco = endereco;
+		this.funcao = funcao;
 		this.dt_admin = dt_admin;
 		this.salario = salario;
 	}
@@ -92,6 +93,14 @@ public class Funcionario implements Serializable {
 		this.endereco = endereco;
 	}
 
+	public String getFuncao() {
+		return funcao;
+	}
+
+	public void setFuncao(String funcao) {
+		this.funcao = funcao;
+	}
+
 	public Date getDt_admin() {
 		return dt_admin;
 	}
@@ -107,9 +116,5 @@ public class Funcionario implements Serializable {
 	public void setSalario(Long salario) {
 		this.salario = salario;
 	}
-	
-	
-	
-	
 
 }

@@ -10,7 +10,7 @@ import com.petshopping.domain.Servicos;
 import com.petshopping.services.ServicosServices;
 
 @RestController
-@RequestMapping(value ="/animal")
+@RequestMapping(value ="/services")
 public class ServicoResource {
 
 	@Autowired

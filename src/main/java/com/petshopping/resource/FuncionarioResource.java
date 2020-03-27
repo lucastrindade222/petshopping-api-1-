@@ -6,22 +6,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.petshopping.domain.Cliente;
-import com.petshopping.services.ClienteService;
+import com.petshopping.domain.Funcionario;
+import com.petshopping.services.FuncionarioServices;
 
 @RestController
-@RequestMapping(value = "/cliente")
-public class ClienteResource {
+@RequestMapping(value = "/funcionario")
+public class FuncionarioResource {
 	@Autowired
-	private ClienteService service;
+	private FuncionarioServices service;
 
-	
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
-	public Cliente buscarporId(@PathVariable Integer id) {
-		
-	  return service.buscar(id);
+	public Funcionario buscarporId(@PathVariable Integer id) {
+		return service.buscar(id);
 	}
-	
 	
 	
 }
