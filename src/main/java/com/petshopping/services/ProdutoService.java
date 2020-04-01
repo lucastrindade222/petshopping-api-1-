@@ -25,5 +25,13 @@ public class ProdutoService {
 	   return obj.orElse(null);
    }
 	
-	
+   public Produtos save(Produtos produto) {
+	   return repo.save(produto);
+   }
+   public Produtos update(Produtos produto) {
+	   return repo.save(produto);
+   }
+	public void deletByid(Integer id) {
+		repo.deleteById(id);
+	}
 }

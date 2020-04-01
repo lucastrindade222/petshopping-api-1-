@@ -12,9 +12,9 @@ public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String rua;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)// erro 
 	private Integer numero;
+	private String rua;
 	private String bairro;
 	private String cidade;
 	private String uf;

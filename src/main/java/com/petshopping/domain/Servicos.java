@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Servicos implements Serializable {
@@ -16,11 +18,14 @@ public class Servicos implements Serializable {
 	private Integer id_servico;
 	private String desc_serv;
 	private Long valor;
-
+	
+	@ManyToOne
+    @JoinColumn(name = "venta_id") 
+	private Venda venda;
+	
 	public Servicos() {
-
 	}
-
+	
 	public Servicos(Integer id_servico, String desc_serv, Long valor) {
 		super();
 		this.id_servico = id_servico;
@@ -77,4 +82,15 @@ public class Servicos implements Serializable {
 		this.valor = valor;
 	}
 
+	public Venda getVenda() {
+		return venda;
+	}
+
+	public void setVenda(Venda venda) {
+		this.venda = venda;
+	}
+
+	
+	
+	
 }

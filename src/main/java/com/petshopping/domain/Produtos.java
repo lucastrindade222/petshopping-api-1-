@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 @Entity
 public class Produtos implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -17,6 +19,10 @@ public class Produtos implements Serializable {
 	private Integer id_produto;
 	private String desc_prod;
 	private Long valor;
+	
+	@ManyToOne
+    @JoinColumn(name = "venta_id") 
+	private Venda venda;
 	
 	
 	 public Produtos() {
@@ -44,7 +50,12 @@ public class Produtos implements Serializable {
 		this.valor = valor;
 	}
 
-
+	public Venda getVenda() {
+		return venda;
+	}
+	public void setVenda(Venda venda) {
+		this.venda = venda;
+	}
 
 	@Override
 	public int hashCode() {
@@ -53,8 +64,6 @@ public class Produtos implements Serializable {
 		result = prime * result + ((id_produto == null) ? 0 : id_produto.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -74,16 +83,16 @@ public class Produtos implements Serializable {
 	}
 
 
- 
-
-
-
 	public Produtos(Integer id_produto, String desc_prod, Long valor) {
 		super();
 		this.id_produto = id_produto;
 		this.desc_prod = desc_prod;
 		this.valor = valor;
 	}
+
+
+
+	
 	
 	
 	

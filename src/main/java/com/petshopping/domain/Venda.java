@@ -18,8 +18,12 @@ public class Venda implements Serializable {
 	private Date de_venda;
 	private Long quantidade;
 	private Long total_venda;
+	
+	 
+	
 
 
+	
 
 	public Venda() {
 
@@ -90,5 +94,9 @@ public class Venda implements Serializable {
 		this.total_venda = total_venda;
 	}
 
+	
+	
+	
+	
 
 }
