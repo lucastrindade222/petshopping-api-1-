@@ -1,38 +1,64 @@
 package com.petshopping.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_pessoa;
 	private String nome;
 	private String cpf;
-	private String telefone;
 	private String email;
+
+	@ElementCollection
+	@CollectionTable(name = "usuario_telefone")
+	@Column(name = "telefone")
+	private List<String> telefones = new ArrayList<>();
+
+	@Embedded
 	private Endereco endereco;
+	@Embedded
+	private Funcionario funcionario;
+	@Embedded
+	private Cliente cliente;
+	
+	@OneToMany(mappedBy = "pessoa")
+	private List<Animal> animal = new ArrayList<>();
 
-	public Pessoa() {
-
-	}
-
-	public Pessoa(Integer id_pessoa, String nome, String cpf, String telefone, String email, Endereco endereco) {
+	  public Pessoa(){
+	 	}
+	
+	
+	
+	public Pessoa(String nome, String cpf, String email, List<String> telefones, Endereco endereco,
+			Funcionario funcionario, Cliente cliente, List<Animal> animal) {
 		super();
-		this.id_pessoa = id_pessoa;
 		this.nome = nome;
 		this.cpf = cpf;
-		this.telefone = telefone;
 		this.email = email;
+		this.telefones = telefones;
 		this.endereco = endereco;
+		this.funcionario = funcionario;
+		this.cliente = cliente;
+		this.animal = animal;
 	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -83,20 +109,20 @@ public class Pessoa implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<String> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(List<String> telefones) {
+		this.telefones = telefones;
 	}
 
 	public Endereco getEndereco() {
@@ -106,5 +132,31 @@ public class Pessoa implements Serializable {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public List<Animal> getAnimal() {
+		return animal;
+	}
+
+	public void setAnimal(List<Animal> animal) {
+		this.animal = animal;
+	}
+	
+	
 
 }

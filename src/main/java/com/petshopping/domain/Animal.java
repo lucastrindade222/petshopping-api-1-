@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 
@@ -22,6 +24,11 @@ public class Animal implements Serializable {
 	private Long pesso;
 	private Long tamanho;
 
+	@ManyToOne
+	@JoinColumn(name = "pessoa_animal")
+	private Pessoa pessoa;
+	
+	
 	public Animal() {
 
 	}
