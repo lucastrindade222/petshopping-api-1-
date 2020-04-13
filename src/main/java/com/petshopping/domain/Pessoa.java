@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -37,17 +39,21 @@ public class Pessoa implements Serializable {
 	@Embedded
 	private Cliente cliente;
 	
+	
 	@OneToMany(mappedBy = "pessoa")
-	private List<Animal> animal = new ArrayList<>();
+	private List<Venda> venda = new ArrayList<Venda>();
 
-	  public Pessoa(){
-	 	}
-	
-	
-	
-	public Pessoa(String nome, String cpf, String email, List<String> telefones, Endereco endereco,
-			Funcionario funcionario, Cliente cliente, List<Animal> animal) {
+	@OneToMany(mappedBy = "pessoa")
+	@JsonIgnore
+	private List<Animal> animal = new ArrayList<Animal>();
+
+	public Pessoa() {
+	}
+
+	public Pessoa(Integer id_pessoa, String nome, String cpf, String email, List<String> telefones, Endereco endereco,
+			Funcionario funcionario, Cliente cliente) {
 		super();
+		this.id_pessoa = id_pessoa;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
@@ -55,10 +61,7 @@ public class Pessoa implements Serializable {
 		this.endereco = endereco;
 		this.funcionario = funcionario;
 		this.cliente = cliente;
-		this.animal = animal;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -156,7 +159,13 @@ public class Pessoa implements Serializable {
 	public void setAnimal(List<Animal> animal) {
 		this.animal = animal;
 	}
-	
-	
+
+	public List<Venda> getVenda() {
+		return venda;
+	}
+
+	public void setVenda(List<Venda> venda) {
+		this.venda = venda;
+	}
 
 }

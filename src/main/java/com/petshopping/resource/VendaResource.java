@@ -37,7 +37,7 @@ public class VendaResource {
 		Venda obj = service.save(venda);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_venda())
 				.toUri();
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.created(uri).build();
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/{id}")

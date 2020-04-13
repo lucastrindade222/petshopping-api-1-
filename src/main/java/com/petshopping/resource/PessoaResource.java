@@ -35,7 +35,7 @@ public class PessoaResource {
 		Pessoa obj = service.save(pessoa);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_pessoa())
 				.toUri();
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.created(uri).build();
 	}
 	@RequestMapping(method = RequestMethod.PUT,value = "/{id}")
 	public ResponseEntity<Void> update(@RequestBody Pessoa pessoa,@PathVariable Integer id){

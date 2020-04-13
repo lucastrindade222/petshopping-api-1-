@@ -35,7 +35,7 @@ public class ServicoResource {
 		Servicos obj = services.salve(servicos);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_servico())
 				.toUri();
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.created(uri).build();
 	}
 	@RequestMapping(method = RequestMethod.PUT,value = "/{id}")
 	public ResponseEntity<Void> update(@RequestBody Servicos servicos,@PathVariable Integer id){

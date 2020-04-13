@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.petshopping.service.Exception.ObejectNotFoudException;
 import com.petshopping.domain.Animal;
 import com.petshopping.repositores.AnimalRepositores;
 
@@ -21,8 +22,10 @@ public class AnimalServices {
 	
 	public Animal buscar(Integer id) {
 		Optional<Animal> obj = repo.findById(id);
-		
-		return obj.orElse(null);
+	 
+		return obj.orElseThrow(() -> new ObejectNotFoudException( "Evento não encontrado. Id: "+id));
+		 
+
 	}
 	
 	public Animal save(Animal animal) {

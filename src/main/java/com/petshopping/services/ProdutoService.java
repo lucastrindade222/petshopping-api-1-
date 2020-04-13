@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.petshopping.domain.Produtos;
-import com.petshopping.repositores.ProdutoRepositores;;
+import com.petshopping.repositores.ProdutoRepositores;
+import com.petshopping.service.Exception.ObejectNotFoudException;;
 
 @Service
 public class ProdutoService {
@@ -22,7 +23,7 @@ public class ProdutoService {
 	
    public Produtos buscar(Integer id) {
 	   Optional<Produtos> obj = repo.findById(id);
-	   return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObejectNotFoudException( "Evento não encontrado. Id: "+id));
    }
 	
    public Produtos save(Produtos produto) {

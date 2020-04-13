@@ -25,7 +25,7 @@ public class Animal implements Serializable {
 	private Long tamanho;
 
 	@ManyToOne
-	@JoinColumn(name = "pessoa_animal")
+	@JoinColumn(name = "pessoa")
 	private Pessoa pessoa;
 	
 	
@@ -33,7 +33,8 @@ public class Animal implements Serializable {
 
 	}
 
-	public Animal(Integer id_animal, String nome, String raca, String pelagem, Long idade, Long pesso, Long tamanho) {
+	public Animal(Integer id_animal, String nome, String raca, String pelagem, Long idade, Long pesso, Long tamanho,
+			Pessoa pessoa) {
 		super();
 		this.id_animal = id_animal;
 		this.nome = nome;
@@ -42,7 +43,9 @@ public class Animal implements Serializable {
 		this.idade = idade;
 		this.pesso = pesso;
 		this.tamanho = tamanho;
+		this.pessoa = pessoa;
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -125,4 +128,14 @@ public class Animal implements Serializable {
 		this.tamanho = tamanho;
 	}
 
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	
+	
 }

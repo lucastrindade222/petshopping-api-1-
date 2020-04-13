@@ -32,9 +32,9 @@ public class AnimalResource {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> salve(@RequestBody Animal animal){
 		Animal obj= servico.save(animal);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_animal())
-				.toUri();
-		return  ResponseEntity.noContent().build();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_animal()).toUri();
+			 
+		return ResponseEntity.created(uri).build();
 		
 	}
 	@RequestMapping(method = RequestMethod.PUT,value = "/{id}")

@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import com.petshopping.domain.enums.Funcoes;
 
 @Embeddable
 public class Funcionario implements Serializable {
@@ -16,6 +20,8 @@ public class Funcionario implements Serializable {
 	private String funcao;
 	private Date dt_admin;
 	private Long salario;
+	@Enumerated(EnumType.STRING)
+	private Funcoes funcoes;
 
 	public Funcionario() {
 		

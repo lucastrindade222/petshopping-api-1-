@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.petshopping.domain.Pessoa;
 import com.petshopping.repositores.PesooaRepositores;
+import com.petshopping.service.Exception.ObejectNotFoudException;
 
 @Service
 public class PessoaServices {
@@ -21,10 +22,12 @@ public class PessoaServices {
 
 	public Pessoa buscar(Integer id) {
 		Optional<Pessoa> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObejectNotFoudException( "Evento não encontrado. Id: "+id));
 	}
 
 	public Pessoa save(Pessoa pessoa) {
+		 
+		
 		return repo.save(pessoa);
 	}
 

@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Servicos implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,17 +23,25 @@ public class Servicos implements Serializable {
 	
 	@ManyToOne
     @JoinColumn(name = "venta_id") 
-	private Venda venda;
+	@JsonIgnore
+	private Venda venda_se;
 	
 	public Servicos() {
 	}
 	
-	public Servicos(Integer id_servico, String desc_serv, Long valor) {
+	 
+	
+
+	public Servicos(Integer id_servico, String desc_serv, Long valor, Venda venda_se) {
 		super();
 		this.id_servico = id_servico;
 		this.desc_serv = desc_serv;
 		this.valor = valor;
+		this.venda_se = venda_se;
 	}
+
+
+
 
 	@Override
 	public int hashCode() {
@@ -82,13 +92,15 @@ public class Servicos implements Serializable {
 		this.valor = valor;
 	}
 
-	public Venda getVenda() {
-		return venda;
+	public Venda getVenda_se() {
+		return venda_se;
 	}
 
-	public void setVenda(Venda venda) {
-		this.venda = venda;
+	public void setVenda_S(Venda venda_S) {
+		this.venda_se = venda_S;
 	}
+
+	
 
 	
 	

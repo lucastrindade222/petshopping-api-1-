@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Produtos implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +24,8 @@ public class Produtos implements Serializable {
 	
 	@ManyToOne
     @JoinColumn(name = "venta_id") 
-	private Venda venda;
+	@JsonIgnore
+	private Venda venda_Pro;
 	
 	
 	 public Produtos() {
@@ -31,6 +34,16 @@ public class Produtos implements Serializable {
 	
 	
 	
+	public Produtos(Integer id_produto, String desc_prod, Long valor, Venda venda_pro) {
+		super();
+		this.id_produto = id_produto;
+		this.desc_prod = desc_prod;
+		this.valor = valor;
+		this.venda_Pro = venda_pro;
+	}
+
+
+
 	public Integer getId_produto() {
 		return id_produto;
 	}
@@ -50,12 +63,19 @@ public class Produtos implements Serializable {
 		this.valor = valor;
 	}
 
-	public Venda getVenda() {
-		return venda;
+
+
+	public Venda getVenda_Pro() {
+		return venda_Pro;
 	}
-	public void setVenda(Venda venda) {
-		this.venda = venda;
+
+
+
+	public void setVenda_P(Venda venda_pro) {
+		this.venda_Pro = venda_pro;
 	}
+
+
 
 	@Override
 	public int hashCode() {

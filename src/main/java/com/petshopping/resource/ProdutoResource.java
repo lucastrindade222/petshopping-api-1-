@@ -36,7 +36,7 @@ public class ProdutoResource {
 		Produtos obj = service.save(produto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_produto())
 				.toUri();
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.created(uri).build();
 	}
 	@RequestMapping(method = RequestMethod.PUT,value = "/{id}")
 	public ResponseEntity<Void> update(@RequestBody Produtos produto,@PathVariable Integer id){
