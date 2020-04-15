@@ -22,7 +22,7 @@ public class ServicosServices {
 
 	public Servicos buscar(Integer id) {
 		Optional<Servicos> obj = repo.findById(id);
-		return obj.orElseThrow(() -> new ObejectNotFoudException( "Evento não encontrado. Id: "+id));
+		return obj.orElseThrow(() -> new ObejectNotFoudException( "Serviço não encontrado. Id: "+id));
 	}
 
 	public Servicos salve(Servicos servicos) {

@@ -8,20 +8,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-@Entity
+import org.hibernate.validator.constraints.Length;
 
+@Entity//  com esta anotação o spring boot  transforma as classe em uma tabelas 
 public class Animal implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id // esta aqui trasforma esta variavel em uma chave primaria no banco 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_animal;
+
+	@NotBlank(message = "O nome é de preenchimento obrigatório")
+	@Length(max = 60, min = 3, message = "O nome deve ter entre 3 e 60 caracteres")
 	private String nome;
+
+	@NotBlank(message = "A Raça é de preenchimento obrigatório")
 	private String raca;
+
+	@NotBlank(message = "A pelagem é de preenchimento obrigatório") 
 	private String pelagem;
+
+	@NotNull(message = "A idade é de preenchimento obrigatório")
 	private Long idade;
+	
+	@NotNull(message = "O pesso é de preenchimento obrigatório")
 	private Long pesso;
+	
+	@NotNull(message = "O tamanho é de preenchimento obrigatório")
 	private Long tamanho;
 
 	@ManyToOne

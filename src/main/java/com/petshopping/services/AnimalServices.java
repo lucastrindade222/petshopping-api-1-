@@ -23,7 +23,7 @@ public class AnimalServices {
 	public Animal buscar(Integer id) {
 		Optional<Animal> obj = repo.findById(id);
 	 
-		return obj.orElseThrow(() -> new ObejectNotFoudException( "Evento não encontrado. Id: "+id));
+		return obj.orElseThrow(() -> new ObejectNotFoudException( "Animal não encontrado. Id: "+id));
 		 
 
 	}

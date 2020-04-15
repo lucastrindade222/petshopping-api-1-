@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,30 +20,60 @@ public class Servicos implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_servico;
-	private String desc_serv;
+	@NotBlank(message = "O CPF é de preenchimento obrigatório")
+	private String descri_S;
+
+	@NotNull(message = "O valor é de preenchimento obrigatório")
 	private Long valor;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "venta_id") 
+	@JoinColumn(name = "venta_id")
 	@JsonIgnore
 	private Venda venda_se;
-	
+
 	public Servicos() {
 	}
-	
-	 
-	
 
-	public Servicos(Integer id_servico, String desc_serv, Long valor, Venda venda_se) {
+	public Servicos(Integer id_servico, String descri_S,
+			@NotNull(message = "O valor é de preenchimento obrigatório") Long valor, Venda venda_se) {
 		super();
 		this.id_servico = id_servico;
-		this.desc_serv = desc_serv;
+		this.descri_S = descri_S;
 		this.valor = valor;
 		this.venda_se = venda_se;
 	}
 
+	public Integer getId_servico() {
+		return id_servico;
+	}
 
+	public void setId_servico(Integer id_servico) {
+		this.id_servico = id_servico;
+	}
 
+	public String getDescri_S() {
+		return descri_S;
+	}
+
+	public void setDescri_S(String descri_S) {
+		this.descri_S = descri_S;
+	}
+
+	public Long getValor() {
+		return valor;
+	}
+
+	public void setValor(Long valor) {
+		this.valor = valor;
+	}
+
+	public Venda getVenda_se() {
+		return venda_se;
+	}
+
+	public void setVenda_se(Venda venda_se) {
+		this.venda_se = venda_se;
+	}
 
 	@Override
 	public int hashCode() {
@@ -68,41 +100,4 @@ public class Servicos implements Serializable {
 		return true;
 	}
 
-	public Integer getId_servico() {
-		return id_servico;
-	}
-
-	public void setId_servico(Integer id_servico) {
-		this.id_servico = id_servico;
-	}
-
-	public String getDesc_serv() {
-		return desc_serv;
-	}
-
-	public void setDesc_serv(String desc_serv) {
-		this.desc_serv = desc_serv;
-	}
-
-	public Long getValor() {
-		return valor;
-	}
-
-	public void setValor(Long valor) {
-		this.valor = valor;
-	}
-
-	public Venda getVenda_se() {
-		return venda_se;
-	}
-
-	public void setVenda_S(Venda venda_S) {
-		this.venda_se = venda_S;
-	}
-
-	
-
-	
-	
-	
 }

@@ -3,6 +3,8 @@ package com.petshopping.resource;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +33,7 @@ public class ServicoResource {
 		return services.buscar(id);
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> salve(@RequestBody Servicos servicos){
+	public ResponseEntity<Void> salve(@Valid @RequestBody Servicos servicos){
 		Servicos obj = services.salve(servicos);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_servico())
 				.toUri();

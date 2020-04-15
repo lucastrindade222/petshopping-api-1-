@@ -1,4 +1,4 @@
-package com.petshopping.resource.Exception;
+package com.petshopping.domain.Exception;
 
 import java.io.Serializable;
 

@@ -2,6 +2,7 @@ package com.petshopping.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
@@ -9,12 +10,22 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.petshopping.domain.enums.Funcoes;
+import com.petshopping.domain.enums.Tipo;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -23,23 +34,47 @@ public class Pessoa implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_pessoa;
+
+	@NotBlank(message = "O nome é de preenchimento obrigatório")
+	@Length(max = 60, min = 3, message = "O nome deve ter entre 3 e 80 caracteres")
 	private String nome;
+	
+	@NotBlank(message = "O CPF é de preenchimento obrigatório")
+	@Length(max = 11, min = 11, message = "O nome deve ter entre 3 e 80 caracteres")
 	private String cpf;
+	
+	@NotBlank(message = "O nome do login é de preenchimento obrigatório")
+	private String login;
+
+	@NotBlank(message = "O e-mail é de preenchimento obrigatório")
+	@Email(message = "Informe um e-mail válido")
 	private String email;
+	
+	@NotBlank(message = "A senha é de preenchimento obrigatório")
+	private String senha;
+	
+	private Date dt_cadast;
+ 
+	private Long salario;
+
+	@Enumerated(EnumType.STRING)
+	private Tipo tipo;
+
+	@Enumerated(EnumType.STRING)
+	private Funcoes funcoes;
 
 	@ElementCollection
 	@CollectionTable(name = "usuario_telefone")
 	@Column(name = "telefone")
+	@NotNull(message = "Informe um telefone para contato")
+	@Size(min = 1, message = "É necessário informar pelo menos um telefone para contato")
 	private List<String> telefones = new ArrayList<>();
-
+    
+	
+	@NotNull(message = "O endereço preenchimento obrigatório")
 	@Embedded
 	private Endereco endereco;
-	@Embedded
-	private Funcionario funcionario;
-	@Embedded
-	private Cliente cliente;
-	
-	
+
 	@OneToMany(mappedBy = "pessoa")
 	private List<Venda> venda = new ArrayList<Venda>();
 
@@ -48,19 +83,6 @@ public class Pessoa implements Serializable {
 	private List<Animal> animal = new ArrayList<Animal>();
 
 	public Pessoa() {
-	}
-
-	public Pessoa(Integer id_pessoa, String nome, String cpf, String email, List<String> telefones, Endereco endereco,
-			Funcionario funcionario, Cliente cliente) {
-		super();
-		this.id_pessoa = id_pessoa;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.email = email;
-		this.telefones = telefones;
-		this.endereco = endereco;
-		this.funcionario = funcionario;
-		this.cliente = cliente;
 	}
 
 	@Override
@@ -120,6 +142,46 @@ public class Pessoa implements Serializable {
 		this.email = email;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public Date getDt_cadast() {
+		return dt_cadast;
+	}
+
+	public void setDt_cadast(Date dt_cadast) {
+		this.dt_cadast = dt_cadast;
+	}
+
+	public Long getSalario() {
+		return salario;
+	}
+
+	public void setSalario(Long salario) {
+		this.salario = salario;
+	}
+
+	public Tipo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
+
+	public Funcoes getFuncoes() {
+		return funcoes;
+	}
+
+	public void setFuncoes(Funcoes funcoes) {
+		this.funcoes = funcoes;
+	}
+
 	public List<String> getTelefones() {
 		return telefones;
 	}
@@ -136,20 +198,12 @@ public class Pessoa implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public Funcionario getFuncionario() {
-		return funcionario;
+	public List<Venda> getVenda() {
+		return venda;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setVenda(List<Venda> venda) {
+		this.venda = venda;
 	}
 
 	public List<Animal> getAnimal() {
@@ -160,12 +214,12 @@ public class Pessoa implements Serializable {
 		this.animal = animal;
 	}
 
-	public List<Venda> getVenda() {
-		return venda;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setVenda(List<Venda> venda) {
-		this.venda = venda;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 }

@@ -23,7 +23,7 @@ public class ProdutoService {
 	
    public Produtos buscar(Integer id) {
 	   Optional<Produtos> obj = repo.findById(id);
-		return obj.orElseThrow(() -> new ObejectNotFoudException( "Evento não encontrado. Id: "+id));
+		return obj.orElseThrow(() -> new ObejectNotFoudException( "Produto não encontrado. Id: "+id));
    }
 	
    public Produtos save(Produtos produto) {

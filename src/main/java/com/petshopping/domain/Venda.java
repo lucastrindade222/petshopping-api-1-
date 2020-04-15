@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,7 +25,11 @@ public class Venda implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_venda;
 	private Date de_venda;
-	private Long quantidade;
+	
+	@NotNull(message = "A quantidade é de preenchimento obrigatório")
+	private String quantidade;
+	
+	@NotNull(message = "A total de venda é de preenchimento obrigatório")
 	private Long total_venda;
 	
 	
@@ -43,7 +48,7 @@ public class Venda implements Serializable {
 
 	}
 
-	public Venda(Integer id_venda, Date de_venda, Long quantidade, Long total_venda,Pessoa pessoa) {
+	public Venda(Integer id_venda, Date de_venda, String quantidade, Long total_venda,Pessoa pessoa) {
 		super();
 		this.id_venda = id_venda;
 		this.de_venda = de_venda;
@@ -93,11 +98,11 @@ public class Venda implements Serializable {
 		this.de_venda = de_venda;
 	}
 
-	public Long getQuantidade() {
+	public String getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Long quantidade) {
+	public void setQuantidade(String quantidade) {
 		this.quantidade = quantidade;
 	}
 
