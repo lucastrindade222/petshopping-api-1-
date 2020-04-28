@@ -31,11 +31,13 @@ public class AnimalServices {
 	public Animal save(Animal animal) {
 		return repo.save(animal);
 	}
+	
 	public Animal update(Animal animal) {
 		return repo.save(animal);
 	}
+	
 	public void deletByid(Integer id) {
-		repo.deleteById(id);
+		repo.deleteById(id);;
 	}
 	
 }

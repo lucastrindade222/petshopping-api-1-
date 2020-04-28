@@ -3,7 +3,10 @@ package com.petshopping.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -12,6 +15,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,8 +30,10 @@ import org.hibernate.validator.constraints.Length;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.petshopping.domain.enums.Funcoes;
 import com.petshopping.domain.enums.Tipo;
+import com.petshopping.services.validators.PessoaInsert;
 
 @Entity
+@PessoaInsert
 public class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -43,9 +49,11 @@ public class Pessoa implements Serializable {
 	@Length(max = 11, min = 11, message = "O nome deve ter entre 3 e 80 caracteres")
 	private String cpf;
 	
+	
 	@NotBlank(message = "O nome do login é de preenchimento obrigatório")
 	private String login;
-
+	
+	@Column(length = 60, nullable = false, unique = true)
 	@NotBlank(message = "O e-mail é de preenchimento obrigatório")
 	@Email(message = "Informe um e-mail válido")
 	private String email;
@@ -57,8 +65,8 @@ public class Pessoa implements Serializable {
  
 	private Long salario;
 
-	@Enumerated(EnumType.STRING)
-	private Tipo tipo;
+
+
 
 	@Enumerated(EnumType.STRING)
 	private Funcoes funcoes;
@@ -81,9 +89,39 @@ public class Pessoa implements Serializable {
 	@OneToMany(mappedBy = "pessoa")
 	@JsonIgnore
 	private List<Animal> animal = new ArrayList<Animal>();
+	
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "usuario_perfil")
+	@NotNull(message = "É necessário informar o perfil do usuário.")
+	@Size(min = 1, message = "Informe pelo menos um perfil para o usuário")
+	private Set<Integer> perfis = new HashSet<>();
+
+	
 
 	public Pessoa() {
 	}
+	
+	
+	public Pessoa(Integer id_pessoa, String nome, String cpf, String email, Endereco endereco) {
+		super();
+		this.id_pessoa = id_pessoa;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.email = email;
+		this.endereco = endereco;
+	 
+	}
+	
+	
+
+	 
+	
+ 
+	
+	
+
+	
 
 	@Override
 	public int hashCode() {
@@ -92,6 +130,7 @@ public class Pessoa implements Serializable {
 		result = prime * result + ((id_pessoa == null) ? 0 : id_pessoa.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -166,13 +205,6 @@ public class Pessoa implements Serializable {
 		this.salario = salario;
 	}
 
-	public Tipo getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(Tipo tipo) {
-		this.tipo = tipo;
-	}
 
 	public Funcoes getFuncoes() {
 		return funcoes;
@@ -221,5 +253,16 @@ public class Pessoa implements Serializable {
 	public void setLogin(String login) {
 		this.login = login;
 	}
+	
+	
+	
+	public void addPerfil(Tipo tipo) {
+		perfis.add(tipo.getCodigo());
+	}
+	
+	public Set<Tipo> getPerfis(){
+		return perfis.stream().map(x -> Tipo.toEnum(x)).collect(Collectors.toSet());
+	}
 
+	
 }

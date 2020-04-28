@@ -39,6 +39,8 @@ public class Venda implements Serializable {
 	@OneToMany(mappedBy = "venda_Pro",cascade = CascadeType.ALL)
 	public List<Produtos> produto = new ArrayList<Produtos>();
 	
+	
+	 
 	@ManyToOne
 	@JoinColumn(name = "pessoa_venda")
 	@JsonIgnore

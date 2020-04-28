@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +45,7 @@ public class VendaResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
+	@PreAuthorize("hasAnyRole('FUNCIONARIO')")
 	public ResponseEntity<Void> save(@Valid @RequestBody Venda venda) {
 		Venda obj = service.save(venda);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_venda())
@@ -52,6 +54,7 @@ public class VendaResource {
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
+	@PreAuthorize("hasAnyRole('FUNCIONARIO')")
 	public ResponseEntity<Void> update(@RequestBody Venda venda, @PathVariable Integer id) {
 		venda.setId_venda(id);
 		service.update(venda);
@@ -59,6 +62,7 @@ public class VendaResource {
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+	@PreAuthorize("hasAnyRole('FUNCIONARIO')")
 	public ResponseEntity<Void> delet(@PathVariable Integer id) {
 		service.deletByid(id);
 		return ResponseEntity.noContent().build();

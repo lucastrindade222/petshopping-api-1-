@@ -36,6 +36,6 @@ public class ResouExceptionHandler  {
 			err.addError(o.getField(), o.getDefaultMessage());
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
-	}
-	
+    }
+
 }

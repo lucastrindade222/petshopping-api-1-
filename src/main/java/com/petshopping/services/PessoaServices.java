@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.petshopping.domain.Pessoa;
@@ -18,6 +19,9 @@ public class PessoaServices {
 
 	@Autowired
 	private PesooaRepositores repo;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	public List<Pessoa> listarpessoa() {
 		return repo.findAll();
@@ -31,6 +35,7 @@ public class PessoaServices {
 	public Pessoa save(Pessoa pessoa) {
 		 
 		pessoa.setDt_cadast(new Date());
+		pessoa.setSenha(encoder.encode(pessoa.getSenha()));
 		return repo.save(pessoa);
 	}
 
