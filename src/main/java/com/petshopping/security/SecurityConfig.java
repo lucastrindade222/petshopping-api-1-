@@ -29,13 +29,21 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter  {
    
 	private static final String[] PUBLIC_ENDPOINTS = {
 			
-			"/h2-console/**"
-		  
+			"/h2-console/**",
+			 "/pessoa/**",
+		
+			 "/services/**",
+			 "/animal/**",
+			 "/historico/**"
+
 			 
 	};
 	
 	private static final String[] PUBLIC_ENDPOINTS_POST = {
-			  "/pessoa/**"
+			  "/pessoa/**",
+			  "/historico/**",
+			  "/animal/**",
+				 "/login/**"
 	};
 	
 	@Override
@@ -72,9 +80,14 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter  {
    CorsConfigurationSource corsConfigurationSource() {
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+		
+		
 		return source;
 		
 	}
+   
+
+
 	
    @Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {

@@ -31,7 +31,7 @@ public class HistoricoService {
 
 	}
 	public Historico salve(Historico historico) {
-		historico.setData_consulta(new Date());
+		historico.setHoje(new Date());
 		return repo.save(historico);
 	}
 	

@@ -17,11 +17,13 @@ public class Historico implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_consuta;
-	private Date data_consulta;
+	private String data_consulta;
+	private Date hoje; 
 	
 	
-	@NotBlank(message = "A Procedimento é de preenchimento obrigatório")
-	private String procedimento;
+	@ManyToOne
+	@JoinColumn(name = "servico")
+	private Servicos  servicos;
 
 	@ManyToOne
 	@JoinColumn(name = "animal")
@@ -33,12 +35,13 @@ public class Historico implements Serializable {
 	}
 	
 	
-	public Historico(Integer id_consuta, Date data_consulta, String procedimento, Animal animal) {
+	public Historico(Integer id_consuta, String data_consulta, Servicos servicos , Animal animal,Date hoje) {
 		super();
 		this.id_consuta = id_consuta;
 		this.data_consulta = data_consulta;
-		this.procedimento = procedimento;
+		this.servicos = servicos;
 		this.animal = animal;
+		this.hoje= hoje;
 	}
 
 	
@@ -84,21 +87,15 @@ public class Historico implements Serializable {
 		this.id_consuta = id_consuta;
 	}
 
-	public Date getData_consulta() {
+	public String getData_consulta() {
 		return data_consulta;
 	}
 
-	public void setData_consulta(Date data_consulta) {
+	public void setData_consulta(String data_consulta) {
 		this.data_consulta = data_consulta;
 	}
 
-	public String getProcedimento() {
-		return procedimento;
-	}
-
-	public void setProcedimento(String procedimento) {
-		this.procedimento = procedimento;
-	}
+	 
 
 	public Animal getAnimal() {
 		return animal;
@@ -106,6 +103,26 @@ public class Historico implements Serializable {
 
 	public void setAnimal(Animal animal) {
 		this.animal = animal;
+	}
+
+
+	public Servicos getServicos() {
+		return servicos;
+	}
+
+
+	public void setServicos(Servicos servicos) {
+		this.servicos = servicos;
+	}
+
+
+	public Date getHoje() {
+		return hoje;
+	}
+
+
+	public void setHoje(Date hoje) {
+		this.hoje = hoje;
 	}
 
 	

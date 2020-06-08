@@ -29,6 +29,9 @@ public class Produtos implements Serializable {
 
 	@NotNull(message = "O valor é de preenchimento obrigatório")
 	private Long valor;
+	
+	private String nomefoto;
+	
 
 	@ManyToOne
 	@JoinColumn(name = "venta_id")
@@ -90,6 +93,22 @@ public class Produtos implements Serializable {
 	public void setdescri_P(String descri) {
 		this.descri_P = descri;
 	}
+	
+	
+
+	public String getNomefoto() {
+		return nomefoto;
+	}
+
+
+
+
+	public void setNomefoto(String nomefoto) {
+		this.nomefoto = nomefoto;
+	}
+
+
+
 
 	@Override
 	public int hashCode() {

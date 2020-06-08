@@ -26,6 +26,9 @@ public class Servicos implements Serializable {
 	@NotNull(message = "O valor é de preenchimento obrigatório")
 	private Long valor;
 
+	private String nomefoto;
+	
+	
 	@ManyToOne
 	@JoinColumn(name = "venta_id")
 	@JsonIgnore
@@ -73,6 +76,14 @@ public class Servicos implements Serializable {
 
 	public void setVenda_se(Venda venda_se) {
 		this.venda_se = venda_se;
+	}
+	
+	public String getNomefoto() {
+		return nomefoto;
+	}
+
+	public void setNomefoto(String nomefoto) {
+		this.nomefoto = nomefoto;
 	}
 
 	@Override

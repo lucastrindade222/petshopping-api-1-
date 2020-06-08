@@ -44,29 +44,25 @@ public class Pessoa implements Serializable {
 	@NotBlank(message = "O nome é de preenchimento obrigatório")
 	@Length(max = 60, min = 3, message = "O nome deve ter entre 3 e 80 caracteres")
 	private String nome;
-	
+
 	@NotBlank(message = "O CPF é de preenchimento obrigatório")
 	@Length(max = 11, min = 11, message = "O nome deve ter entre 3 e 80 caracteres")
 	private String cpf;
-	
-	
-	@NotBlank(message = "O nome do login é de preenchimento obrigatório")
+
+//	@NotBlank(message = "O nome do login é de preenchimento obrigatório")
 	private String login;
-	
+
 	@Column(length = 60, nullable = false, unique = true)
 	@NotBlank(message = "O e-mail é de preenchimento obrigatório")
 	@Email(message = "Informe um e-mail válido")
 	private String email;
-	
+
 	@NotBlank(message = "A senha é de preenchimento obrigatório")
 	private String senha;
-	
+
 	private Date dt_cadast;
- 
+
 	private Long salario;
-
-
-
 
 	@Enumerated(EnumType.STRING)
 	private Funcoes funcoes;
@@ -77,8 +73,7 @@ public class Pessoa implements Serializable {
 	@NotNull(message = "Informe um telefone para contato")
 	@Size(min = 1, message = "É necessário informar pelo menos um telefone para contato")
 	private List<String> telefones = new ArrayList<>();
-    
-	
+
 	@NotNull(message = "O endereço preenchimento obrigatório")
 	@Embedded
 	private Endereco endereco;
@@ -89,20 +84,16 @@ public class Pessoa implements Serializable {
 	@OneToMany(mappedBy = "pessoa")
 	@JsonIgnore
 	private List<Animal> animal = new ArrayList<Animal>();
-	
-	
+
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "usuario_perfil")
 	@NotNull(message = "É necessário informar o perfil do usuário.")
 	@Size(min = 1, message = "Informe pelo menos um perfil para o usuário")
 	private Set<Integer> perfis = new HashSet<>();
 
-	
-
 	public Pessoa() {
 	}
-	
-	
+
 	public Pessoa(Integer id_pessoa, String nome, String cpf, String email, Endereco endereco) {
 		super();
 		this.id_pessoa = id_pessoa;
@@ -110,18 +101,8 @@ public class Pessoa implements Serializable {
 		this.cpf = cpf;
 		this.email = email;
 		this.endereco = endereco;
-	 
+
 	}
-	
-	
-
-	 
-	
- 
-	
-	
-
-	
 
 	@Override
 	public int hashCode() {
@@ -130,7 +111,6 @@ public class Pessoa implements Serializable {
 		result = prime * result + ((id_pessoa == null) ? 0 : id_pessoa.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -205,7 +185,6 @@ public class Pessoa implements Serializable {
 		this.salario = salario;
 	}
 
-
 	public Funcoes getFuncoes() {
 		return funcoes;
 	}
@@ -253,16 +232,13 @@ public class Pessoa implements Serializable {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	
-	
-	
+
 	public void addPerfil(Tipo tipo) {
 		perfis.add(tipo.getCodigo());
 	}
-	
-	public Set<Tipo> getPerfis(){
+
+	public Set<Tipo> getPerfis() {
 		return perfis.stream().map(x -> Tipo.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	
 }
