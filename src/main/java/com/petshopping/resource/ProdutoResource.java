@@ -9,6 +9,7 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.petshopping.domain.Produtos;
 import com.petshopping.services.ProdutoService;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/produto")
 public class ProdutoResource {
@@ -38,7 +39,7 @@ public class ProdutoResource {
 		return service.buscar(id);
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	@PreAuthorize("hasAnyRole('FUNCIONARIO')")
+//	@PreAuthorize("hasAnyRole('FUNCIONARIO')")
 	public ResponseEntity<Void> salve(@Valid @RequestBody Produtos produto ){
 		Produtos obj = service.save(produto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_produto())
@@ -62,7 +63,7 @@ public class ProdutoResource {
 	}
 	
 	@RequestMapping(value = "/foto/{id}",method = RequestMethod.POST)
-	@PreAuthorize("hasAnyRole('FUNCIONARIO')")
+//	@PreAuthorize("hasAnyRole('FUNCIONARIO')")
 	public ResponseEntity<Void> foto(@PathVariable Integer id,@RequestParam("file")MultipartFile multipartFile ){
 		
 		URI uri = service.uploadFoto(id, multipartFile);

@@ -34,8 +34,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter  {
 		
 			 "/services/**",
 			 "/animal/**",
-			 "/historico/**"
-
+			 "/historico/**",
+			 "/produto/**"
 			 
 	};
 	
@@ -43,7 +43,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter  {
 			  "/pessoa/**",
 			  "/historico/**",
 			  "/animal/**",
-				 "/login/**"
+			  "/services/**",
+			  "/produto/**"
 	};
 	
 	@Override

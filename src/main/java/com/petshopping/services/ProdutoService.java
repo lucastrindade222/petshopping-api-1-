@@ -62,12 +62,14 @@ public class ProdutoService {
 			if (!ext.equals("png") && !ext.equals("jpg")) {
 				throw new FileException("ERRO:o arquivo informado não a exteção .png ou .jpg");
 			}
+			
+			id =listarproduto().size();
 			Produtos produtos = buscar(id);
-			String nomeArquivo = "serviso" + id + "." + ext;
+			String nomeArquivo = "produto" + id + "." + ext;
 			String contentType = multipartFile.getContentType();
 			ObjectMetadata meta = new ObjectMetadata();
 			meta.setContentType(contentType);
-			amazonS3.putObject(bucket, "serviso/" + nomeArquivo, multipartFile.getInputStream(), meta);
+			amazonS3.putObject(bucket, "produto/" + nomeArquivo, multipartFile.getInputStream(), meta);
 
 			produtos.setNomefoto(nomeArquivo);
 			repo.save(produtos);

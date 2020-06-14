@@ -36,7 +36,7 @@ public class ServicoResource {
 		return services.buscar(id);
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	@PreAuthorize("hasAnyRole('FUNCIONARIO')")
+//	@PreAuthorize("hasAnyRole('FUNCIONARIO')")
 	public ResponseEntity<Void> salve(@Valid @RequestBody Servicos servicos){
 		Servicos obj = services.salve(servicos);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_servico())
@@ -58,7 +58,7 @@ public class ServicoResource {
 	}
 	
 	@RequestMapping(value = "/foto/{id}",method = RequestMethod.POST)
-	@PreAuthorize("hasAnyRole('FUNCIONARIO')")
+//	@PreAuthorize("hasAnyRole('FUNCIONARIO')")
 	public ResponseEntity<Void> foto(@PathVariable Integer id,@RequestParam("file")MultipartFile multipartFile ){
 		
 		URI uri = services.uploadFoto(id, multipartFile);
