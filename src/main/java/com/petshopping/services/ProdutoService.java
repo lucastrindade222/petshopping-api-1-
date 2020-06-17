@@ -64,6 +64,7 @@ public class ProdutoService {
 			}
 			
 			id =listarproduto().size();
+			System.out.println("id da foto:"+id);
 			Produtos produtos = buscar(id);
 			String nomeArquivo = "produto" + id + "." + ext;
 			String contentType = multipartFile.getContentType();

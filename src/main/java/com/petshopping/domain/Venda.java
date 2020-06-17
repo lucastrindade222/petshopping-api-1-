@@ -1,21 +1,15 @@
 package com.petshopping.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Venda implements Serializable {
@@ -33,17 +27,18 @@ public class Venda implements Serializable {
 	private Long total_venda;
 	
 	
-	@OneToMany(mappedBy = "venda_se",cascade = CascadeType.ALL)
-	public List<Servicos> servico = new ArrayList<Servicos>();
+	@ManyToOne
+	@JoinColumn(name = "venda_ser")
+	public Servicos servico ;
 	
-	@OneToMany(mappedBy = "venda_Pro",cascade = CascadeType.ALL)
-	public List<Produtos> produto = new ArrayList<Produtos>();
 	
+	@ManyToOne
+	@JoinColumn(name = "venda_pro")
+	public Produtos produtos ;
 	
 	 
 	@ManyToOne
 	@JoinColumn(name = "pessoa_venda")
-	@JsonIgnore
 	private Pessoa pessoa;
 
 	public Venda() {
@@ -116,20 +111,24 @@ public class Venda implements Serializable {
 		this.total_venda = total_venda;
 	}
 
-	public List<Servicos> getServico() {
+	
+
+	public Servicos getServico() {
 		return servico;
 	}
 
-	public void setServico(List<Servicos> servico) {
+	public void setServico(Servicos servico) {
 		this.servico = servico;
 	}
 
-	public List<Produtos> getProduto() {
-		return produto;
+	 
+
+	public Produtos getProdutos() {
+		return produtos;
 	}
 
-	public void setProduto(List<Produtos> produto) {
-		this.produto = produto;
+	public void setProdutos(Produtos produtos) {
+		this.produtos = produtos;
 	}
 
 	public Pessoa getPessoa() {

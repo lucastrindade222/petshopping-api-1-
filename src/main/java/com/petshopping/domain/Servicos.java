@@ -1,13 +1,15 @@
 package com.petshopping.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -29,21 +31,23 @@ public class Servicos implements Serializable {
 	private String nomefoto;
 	
 	
-	@ManyToOne
-	@JoinColumn(name = "venta_id")
+	 
+	@OneToMany(mappedBy = "servico",cascade = CascadeType.ALL)
 	@JsonIgnore
-	private Venda venda_se;
+	public List<Venda> venda_se = new ArrayList<Venda>();
 
+	
+	
 	public Servicos() {
 	}
 
 	public Servicos(Integer id_servico, String descri_S,
-			@NotNull(message = "O valor é de preenchimento obrigatório") Long valor, Venda venda_se) {
+	@NotNull(message = "O valor é de preenchimento obrigatório") Long valor) {
 		super();
 		this.id_servico = id_servico;
 		this.descri_S = descri_S;
 		this.valor = valor;
-		this.venda_se = venda_se;
+		
 	}
 
 	public Integer getId_servico() {
@@ -70,14 +74,15 @@ public class Servicos implements Serializable {
 		this.valor = valor;
 	}
 
-	public Venda getVenda_se() {
+	 
+	public List<Venda> getVenda_se() {
 		return venda_se;
 	}
 
-	public void setVenda_se(Venda venda_se) {
+	public void setVenda_se(List<Venda> venda_se) {
 		this.venda_se = venda_se;
 	}
-	
+
 	public String getNomefoto() {
 		return nomefoto;
 	}

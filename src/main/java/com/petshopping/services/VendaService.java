@@ -46,86 +46,15 @@ public class VendaService {
 	public Venda save(Venda venda) {
 		
 	
-		if(venda.getProduto() != null) {
-			for(Produtos p : venda.getProduto()) {
-			p.setVenda_P(venda);
-			}
-			
-		}
 		
-		if(venda.getServico() != null) {
-			for(Servicos s : venda.getServico()) {
-			s.setVenda_se(venda);
-			}
-			venda.setDe_venda(new Date());
-		}
 		
 		return repo.save(venda);
 
 	}
 
 	public Venda update(Venda venda) {
-		Venda objUpdate = buscarvenda(venda.getId_venda());
-		Venda objUpdates = buscarvenda(venda.getId_venda());
-		List<Produtos> produtodelet= new ArrayList<Produtos>();
-		List<Servicos> servicodelet= new ArrayList<Servicos>();
-		
-		
-		if(venda.getProduto() != null) {
-			for(Produtos p : venda.getProduto()) {
-				p.setVenda_P(venda);
-			}
-		}
-		
-		for(Produtos produtosupdate:objUpdate.getProduto()) {
-			boolean is=false;
-			
-			 for(Produtos p :venda.getProduto()) {
-				 if(produtosupdate.getId_produto().equals(p.getId_produto())) {
-					 is=true;
-				 }
-			 }
-			 
-			 if(!is) {
-				produtodelet.add(produtosupdate);
-			 }
-		}
-		
-		
-
-		
-		
-		if(venda.getServico() != null) {
-			for(Servicos s : venda.getServico()) {
-				s.setVenda_se(venda);;
-			}
-		}
-		
-		for(Servicos servicosupdate:objUpdates.getServico()) {
-			boolean is=false;
-			
-			 for(Servicos s :venda.getServico()) {
-				 if(servicosupdate.getId_servico().equals(s.getId_servico())) {
-					 is=true;
-				 }
-			 }
-			 
-			 if(!is) {
-				servicodelet.add(servicosupdate);
-			 }
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		venda = repo.save(venda);
-		produtorepo.deleteAll(produtodelet);
-		servicoRepositores.deleteAll(servicodelet);
-		return venda;
+	   
+		return repo.save(venda);
 
 		
 		

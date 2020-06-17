@@ -33,7 +33,7 @@ public class AnimalResource {
 		return servico.buscar(id);
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	@PreAuthorize("hasAnyRole('FUNCIONARIO')")
+	//@PreAuthorize("hasAnyRole('FUNCIONARIO')")
 	public ResponseEntity<Void> salve(@Valid @RequestBody Animal animal){
 		Animal obj= servico.save(animal);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_animal()).toUri();

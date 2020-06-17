@@ -79,6 +79,7 @@ public class Pessoa implements Serializable {
 	private Endereco endereco;
 
 	@OneToMany(mappedBy = "pessoa")
+	@JsonIgnore
 	private List<Venda> venda = new ArrayList<Venda>();
 
 	@OneToMany(mappedBy = "pessoa")

@@ -66,8 +66,13 @@ public class ServicosServices {
 			if (!ext.equals("png") && !ext.equals("jpg")) {
 				throw new FileException("ERRO:o arquivo informado não a exteção .png ou .jpg");
 			}
+			Integer inx=listarservico().size();;
+			System.out.println(""+inx);
+			 System.out.println("id foto servico:"+id);
+			 id=  1+inx;
+			 System.out.println("id foto servico:"+id);
 			
-			 id=1+listarservico().size();
+			 
 			 Servicos servicos= buscar(id);
 			String nomeArquivo = "servicos" + id + "." + ext;
 			String contentType = multipartFile.getContentType();

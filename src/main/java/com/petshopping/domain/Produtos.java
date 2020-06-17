@@ -1,13 +1,15 @@
 package com.petshopping.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -30,14 +32,15 @@ public class Produtos implements Serializable {
 	@NotNull(message = "O valor é de preenchimento obrigatório")
 	private Long valor;
 	
+	private int quantidade;
+	
 	private String nomefoto;
 	
 
-	@ManyToOne
-	@JoinColumn(name = "venta_id")
+	@OneToMany(mappedBy = "produtos",cascade = CascadeType.ALL)
 	@JsonIgnore
-	private Venda venda_Pro;
-
+	public List<Venda> vanda_P = new ArrayList<Venda>();
+	
 	public Produtos() {
 
 	}
@@ -47,12 +50,13 @@ public class Produtos implements Serializable {
 
 	public Produtos(Integer id_produto,
 			@NotBlank(message = "O nome é de preenchimento obrigatório") @Length(max = 60, min = 3, message = "O nome deve ter entre 3 e 80 caracteres") String descri,
-			@NotNull(message = "O valor é de preenchimento obrigatório") Long valor, Venda venda_Pro) {
+			@NotNull(message = "O valor é de preenchimento obrigatório") Long valor, int q) {
 		super();
 		this.id_produto = id_produto;
 		this.descri_P = descri;
 		this.valor = valor;
-		this.venda_Pro = venda_Pro;
+		
+		this.quantidade= q;
 	}
 
 
@@ -74,27 +78,31 @@ public class Produtos implements Serializable {
 		this.valor = valor;
 	}
 
-	public Venda getVenda_Pro() {
-		return venda_Pro;
+
+
+	public List<Venda> getVanda_P() {
+		return vanda_P;
 	}
 
-	public void setVenda_P(Venda venda_pro) {
-		this.venda_Pro = venda_pro;
+
+
+
+	public void setVanda_P(List<Venda> vanda_P) {
+		this.vanda_P = vanda_P;
 	}
 
-	public void setVenda_Pro(Venda venda_Pro) {
-		this.venda_Pro = venda_Pro;
-	}
+
+
+
+	
+	
 
 	public String getDescri_P() {
 		return descri_P;
 	}
 
-	public void setdescri_P(String descri) {
-		this.descri_P = descri;
-	}
-	
-	
+
+
 
 	public String getNomefoto() {
 		return nomefoto;
@@ -105,6 +113,28 @@ public class Produtos implements Serializable {
 
 	public void setNomefoto(String nomefoto) {
 		this.nomefoto = nomefoto;
+	}
+
+	
+
+
+
+	public void setDescri_P(String descri_P) {
+		this.descri_P = descri_P;
+	}
+
+
+
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+
+
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
 	}
 
 
@@ -135,4 +165,8 @@ public class Produtos implements Serializable {
 		return true;
 	}
 
+	
+	
+	
+	
 }

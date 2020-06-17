@@ -35,8 +35,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter  {
 			 "/services/**",
 			 "/animal/**",
 			 "/historico/**",
-			 "/produto/**"
-			 
+			 "/produto/**",
+			 "/vendas/**"
 	};
 	
 	private static final String[] PUBLIC_ENDPOINTS_POST = {
@@ -44,7 +44,16 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter  {
 			  "/historico/**",
 			  "/animal/**",
 			  "/services/**",
-			  "/produto/**"
+			  "/produto/**",
+			  "/vendas/**"
+	};
+	private static final String[] PUBLIC_ENDPOINTS_PUT = {
+			  "/pessoa/**",
+			  "/historico/**",
+			  "/animal/**",
+			  "/services/**",
+			  "/produto/**",
+			  "/vendas/**"
 	};
 	
 	@Override
@@ -57,7 +66,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter  {
 		
 		http.authorizeRequests().
 		antMatchers(PUBLIC_ENDPOINTS).permitAll()
-		.antMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS_POST).permitAll().
+		.antMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS_POST).permitAll().antMatchers(HttpMethod.PUT,PUBLIC_ENDPOINTS_PUT).permitAll().
 		anyRequest().authenticated();
 		
 		

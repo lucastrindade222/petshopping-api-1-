@@ -45,7 +45,7 @@ public class VendaResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	@PreAuthorize("hasAnyRole('FUNCIONARIO')")
+//	@PreAuthorize("hasAnyRole('FUNCIONARIO')")
 	public ResponseEntity<Void> save(@Valid @RequestBody Venda venda) {
 		Venda obj = service.save(venda);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_venda())
